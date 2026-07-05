@@ -1,19 +1,15 @@
-
+const appError = require('../utils/appError')
 
 exports.validateLogin = (req, res, next) => {
     const { email, password } = req.body;
     const normalizationEmail = email.trim().toLowerCase();
 
     if (!normalizationEmail || !password) {
-        return res.status(400).json({
-            error: "Email and password are required"
-        })
+        throw new appError(400, "Email and password are required")
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(normalizationEmail)) {
-        return res.status(400).json({
-            error: "Invalid email format"
-        })
+        throw new appError(400, "Invalid email format")
     }
     next();
 }
@@ -25,20 +21,14 @@ exports.validateRegister = (req, res, next) => {
     const normalizationName = username.trim();
 
     if (!normalizationEmail || !normalizationName || !password) {
-        return res.status(400).json({
-            error: "All field are required"
-        })
+        throw new appError(400, "All field are required")
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(normalizationEmail)) {
-        return res.status(400).json({
-            error: "Invalid email format"
-        })
+        throw new appError(400, "Invalid email format")
     }
     if (password.length < 8) {
-        return res.status(400).json({
-            error: "Password must be at least 8 characters"
-        })
+        throw new appError(400, "Password must be at least 8 characters")
     }
 
     next();
