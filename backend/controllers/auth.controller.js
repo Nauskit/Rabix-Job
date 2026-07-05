@@ -7,16 +7,16 @@ const authController = {
         try {
             const { email, password } = req.body;
             const result = await authService.login(email, password);
-            res.status(200)
+            res.status(200).json(result)
         } catch (e) {
             next(e)
         }
     },
     async register(req, res, next) {
         try {
-            const { email, password, username } = req.body;
-            const result = await authService.register({ email, password, username })
-            res.status(201);
+            const { username, email, password } = req.body;
+            const result = await authService.register({ username, password, email })
+            res.status(201).json(result);
         } catch (e) {
             next(e)
         }

@@ -1,7 +1,6 @@
 const bodyParser = require('body-parser');
 const cors = require('cors')
 const express = require('express');
-const { route } = require('./routers/auth.router');
 const authRouter = require('./routers/auth.router')
 const errorHandler = require('./middlewares/errorHandler.middleware')
 const app = express();

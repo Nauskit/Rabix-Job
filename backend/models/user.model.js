@@ -9,10 +9,10 @@ const userModel = {
         );
         return result.rows[0] || null;
     },
-    async create({ email, password, usernname }) {
+    async createUser({ username, email, hashPassword }) {
         const result = await pool.query(
-            `INSERT INTO users (email,password,username,created_at) VALUES ($1,$2,$3,NOW()) RETURNING *`,
-            [email, password, usernname]
+            `INSERT INTO users (username,email,password) VALUES ($1,$2,$3) RETURNING *`,
+            [username, email, hashPassword]
         )
         return result.rows[0];
     }

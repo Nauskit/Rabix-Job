@@ -16,7 +16,7 @@ const connectDB = async () => {
         console.log('Server connected successfully');
         client.release();
     } catch (e) {
-        console.error('PostgreSQL connection filed: ', e.message);
+        console.error('Error: ', e.message);
         process.exit(1)
     }
 }
